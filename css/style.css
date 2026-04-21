@@ -18,10 +18,10 @@
   --accent2-rgb: 62, 207, 178;
   --accent3: #f0a05b;
   --accent3-rgb: 240, 160, 91;
-  --text: #dde3f5;
-  --text-bright: #f0f4ff;
-  --muted: #6b7499;
-  --dim: #3a4060;
+  --text: #e8ebf5;
+  --text-bright: #ffffff;
+  --muted: #959ebd;
+  --dim: #5c668a;
   --glow-accent: 0 0 30px rgba(91, 138, 240, 0.15);
   --glow-accent2: 0 0 30px rgba(62, 207, 178, 0.15);
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -30,23 +30,22 @@
 }
 
 [data-theme="light"] {
-  --bg: #FAFAF7; /* Warm cinematic off-white */
-  --bg-rgb: 250, 250, 247;
+  --bg: #FDFDFB; /* Warm cloud off-white */
+  --bg-rgb: 253, 253, 251;
   --surface: #ffffff;
-  --surface2: #f2f2ee;
-  --surface3: #e8e8e3;
-  --border: rgba(0, 0, 0, 0.06);
-  --border-hover: rgba(0, 0, 0, 0.18);
-  --text: #414247;
-  --text-bright: #16181D;
-  --muted: #7A7C85;
-  --dim: #B3B5BA;
+  --surface2: #F4F4F2;
+  --surface3: #EBEBE8;
+  --border: rgba(10, 17, 40, 0.05);
+  --border-hover: rgba(10, 17, 40, 0.12);
+  --text: #1A202C; /* Deep charcoal for main text */
+  --text-bright: #000000; /* Pure black for extreme clarity on headings */
+  --muted: #4A5568; /* Harder, highly legible grey for descriptions */
+  --dim: #718096; /* Medium grey for subtle tags */
   
-  /* Slightly darker accents to maintain contrast perfectly on light background */
-  --accent: #436BD9;
-  --accent-rgb: 67, 107, 217;
-  --accent2: #8459E8;
-  --accent2-rgb: 132, 89, 232;
+  --accent: #3A5FCD; /* Electric Indigo */
+  --accent-rgb: 58, 95, 205;
+  --accent2: #FF7A59; /* Warm Terracotta */
+  --accent2-rgb: 255, 122, 89;
 }
 
 /* ─── 2. RESET & BASE ──────────────────────── */
@@ -67,8 +66,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: 'DM Mono', monospace;
-  font-size: 14px;
-  line-height: 1.75;
+  font-size: 15px;
+  line-height: 1.7;
   overflow-x: hidden;
   cursor: none;
   -webkit-font-smoothing: antialiased;
@@ -255,6 +254,10 @@ body::after {
   z-index: 9990;
 }
 
+[data-theme="light"] body::after {
+  display: none;
+}
+
 /* ─── 8. AMBIENT ORBS ──────────────────────── */
 .orb {
   position: fixed;
@@ -263,6 +266,10 @@ body::after {
   pointer-events: none;
   z-index: 0;
 }
+
+[data-theme="light"] .orb-1 { background: rgba(var(--accent-rgb), 0.15); filter: blur(140px); }
+[data-theme="light"] .orb-2 { background: rgba(var(--accent2-rgb), 0.12); filter: blur(140px); }
+[data-theme="light"] .orb-3 { background: rgba(var(--accent-rgb), 0.10); filter: blur(140px); }
 
 .orb-1 {
   width: 700px;
@@ -1351,6 +1358,32 @@ section {
   margin-bottom: 20px;
 }
 
+.edu-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: inline-block;
+  cursor: none;
+}
+
+.edu-link:hover {
+  color: var(--accent);
+}
+
+.edu-link .link-arrow {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-4px) translateY(4px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+}
+
+.edu-link:hover .link-arrow {
+  opacity: 1;
+  transform: translateX(2px) translateY(0);
+}
+
 .edu-meta {
   display: flex;
   justify-content: space-between;
@@ -1841,6 +1874,25 @@ html {
   margin-top: 32px;
   padding-top: 24px;
   border-top: 1px solid var(--border);
+}
+
+/* ─── 16. LIGHT THEME ELEVATION ─────────────── */
+[data-theme="light"] .project-card,
+[data-theme="light"] .skill-card,
+[data-theme="light"] .edu-card,
+[data-theme="light"] .exp-card,
+[data-theme="light"] .contact-card {
+  box-shadow: 0 16px 40px rgba(10, 17, 40, 0.04);
+  border: 1px solid rgba(10, 17, 40, 0.04);
+  background: var(--surface);
+  transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth), border-color 0.4s ease;
+}
+
+[data-theme="light"] .project-card:hover,
+[data-theme="light"] .skill-card:hover,
+[data-theme="light"] .contact-card:hover {
+  box-shadow: 0 24px 48px rgba(58, 95, 205, 0.08);
+  border-color: rgba(58, 95, 205, 0.15);
 }
 
 /* Disable custom cursor on touch devices */
